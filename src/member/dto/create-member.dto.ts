@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { MemberRole } from '../entities/member.entity';
 
 export class CreateMemberDto {
   @ApiProperty({
@@ -12,6 +13,13 @@ export class CreateMemberDto {
     example: 'https://dummyimage.com/600x600/f2f2f2/141414&text=HeroAvatar',
   })
   hero_avatar: string;
+
+  @ApiProperty({
+    description: '身份',
+    enum: MemberRole,
+    example: MemberRole.teacher,
+  })
+  identity: MemberRole;
 
   @ApiProperty({ description: '中文名', example: '陶冶' })
   cn_name: string;

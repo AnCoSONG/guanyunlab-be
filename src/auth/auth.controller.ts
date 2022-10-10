@@ -1,8 +1,9 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { User } from '../decorators';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
+import { JwtGuard } from './guard/jwt.guard';
 import { LocalGuard } from './guard/local.guard';
 
 @ApiTags('鉴权')
@@ -15,5 +16,12 @@ export class AuthController {
   async login(@Body() login: LoginDto, @User() user: any) {
     const data = await this.authService.login(user);
     return data;
+  }
+
+  @Get('check')
+  @UseGuards(JwtGuard)
+  @ApiBearerAuth()
+  async check(@User() user) {
+    return user;
   }
 }

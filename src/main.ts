@@ -7,7 +7,10 @@ import * as cookieParser from 'cookie-parser';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     cors: {
-      origin: '*',
+      origin:
+        process.env.NODE_ENV === 'dev'
+          ? ['http://localhost:31731', 'http://localhost:5173']
+          : ['https://design.zju.edu.cn'],
       credentials: true,
     },
   });

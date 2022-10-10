@@ -37,6 +37,11 @@ export class ProjectController {
     return this.projectService.update(id, updateProjectDto);
   }
 
+  @Patch('/updateViewCount/:id')
+  updateViewCount(@Param('id') id: string) {
+    return this.projectService.updateViewCount(id);
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.projectService.remove(id);

@@ -7,6 +7,9 @@ import { Project } from './entities/project.entity';
 
 @Injectable()
 export class ProjectService {
+  async updateViewCount(id: string) {
+    return await this.projectRepository.increment({ id }, 'view_count', 1);
+  }
   private readonly logger = new Logger(ProjectService.name);
   constructor(
     @InjectRepository(Project)
