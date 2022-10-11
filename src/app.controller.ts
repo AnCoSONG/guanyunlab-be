@@ -28,15 +28,16 @@ export class AppController {
   }
 
   @Post('upload')
-  @UseGuards(JwtGuard)
-  @ApiBearerAuth()
+  // @UseGuards(JwtGuard)
+  // @ApiBearerAuth()
   @UseInterceptors(FileInterceptor('file'))
   uploadFile(@UploadedFile() file: Express.Multer.File) {
     console.log(file);
     const src =
       process.env.NODE_ENV === 'dev'
-        ? 'http://localhost:3000/' + file.path
-        : 'https://design.zju.edu.cn/' + file.path;
+        ? 'http://localhost:3173/static/' + file.filename
+        : 'https://design.zju.edu.cn/gylab-api/' + file.path;
+
     return src;
   }
 }
