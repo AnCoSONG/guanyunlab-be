@@ -22,7 +22,7 @@ import * as fs from 'fs';
       type: 'mysql',
       host: 'localhost',
       port: 3306,
-      username: 'root',
+      username: 'gylab',
       password: 'inlab@2022',
       database: 'gylab',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
