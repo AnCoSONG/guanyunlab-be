@@ -10,6 +10,7 @@ import { UserModule } from './user/user.module';
 import { MulterModule } from '@nestjs/platform-express';
 import { MetadataModule } from './metadata/metadata.module';
 import { AuthModule } from './auth/auth.module';
+import { ImgModule } from './img/img.module';
 import * as multer from 'multer';
 import * as fs from 'fs';
 @Module({
@@ -45,6 +46,7 @@ import * as fs from 'fs';
     }),
     MetadataModule,
     AuthModule,
+    ImgModule,
   ],
   controllers: [AppController],
   providers: [AppService],

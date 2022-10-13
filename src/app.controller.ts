@@ -38,6 +38,6 @@ export class AppController {
         ? 'http://localhost:3173/static/' + file.filename
         : 'https://design.zju.edu.cn/gylab-api/' + file.path;
 
-    return src;
+    return {location: src}
   }
 }

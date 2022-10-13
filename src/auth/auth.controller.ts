@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Logger, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { User } from '../decorators';
 import { AuthService } from './auth.service';
@@ -9,6 +9,7 @@ import { LocalGuard } from './guard/local.guard';
 @ApiTags('鉴权')
 @Controller('auth')
 export class AuthController {
+  private readonly logger = new Logger('AuthController')
   constructor(private readonly authService: AuthService) {}
 
   @Post('login')
@@ -22,6 +23,7 @@ export class AuthController {
   @UseGuards(JwtGuard)
   @ApiBearerAuth()
   async check(@User() user) {
+    // this.logger.log(user)
     return user;
   }
 }
