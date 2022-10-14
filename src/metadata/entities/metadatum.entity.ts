@@ -6,7 +6,7 @@ export class Metadatum {
   id: string;
 
   @Column({ type: 'json', nullable: true })
-  about_hero: string[];
+  about_heros: string[];
 
   @Column({ type: 'text' })
   recruit_hypertext: string;

@@ -1,4 +1,7 @@
 {
     "files.eol": "\r\n",
-    "typescript.tsdk": "node_modules/typescript/lib"
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "files.watcherExclude": {
+        "**/dist/**": true
+    }
 }
