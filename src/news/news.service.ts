@@ -7,6 +7,12 @@ import { News } from './entities/news.entity';
 
 @Injectable()
 export class NewsService {
+  async getAll(count: number) {
+    return await this.newsRepository.find({
+      order: { last_date: 'DESC' },
+      take: count,
+    });
+  }
   constructor(
     @InjectRepository(News) private newsRepository: Repository<News>,
   ) {}

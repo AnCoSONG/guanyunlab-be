@@ -7,6 +7,21 @@ import { Metadatum } from './entities/metadatum.entity';
 
 @Injectable()
 export class MetadataService {
+  async getContactHypertexts() {
+    return await this.metadatumRepository.find({
+      select: [
+        'collaboration_sponsor_hypertext',
+        'info_hypertext',
+        'lab_office_hypertext',
+        'recruit_hypertext',
+      ],
+    });
+  }
+  async getAboutImgs() {
+    return await this.metadatumRepository.find({
+      select: ['about_heros'],
+    });
+  }
   constructor(
     @InjectRepository(Metadatum)
     private metadatumRepository: Repository<Metadatum>,

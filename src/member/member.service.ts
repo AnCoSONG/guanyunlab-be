@@ -40,9 +40,7 @@ export class MemberService {
   }
 
   async findAll() {
-    return await this.memberRepository.find({
-      select: ['avatar', 'cn_name', 'cn_title', 'en_name', 'en_title', 'id'],
-    });
+    return await this.memberRepository.find();
   }
 
   async findOne(id: string) {

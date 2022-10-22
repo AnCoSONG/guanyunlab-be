@@ -9,14 +9,12 @@ import {
   UseInterceptors,
   UploadedFile,
   Query,
-  ParseIntPipe,
 } from '@nestjs/common';
 import { ImgService } from './img.service';
 import { CreateImgDto } from './dto/create-img.dto';
 import { UpdateImgDto } from './dto/update-img.dto';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { count } from 'console';
 
 @ApiTags('图像')
 @Controller('img')

@@ -7,6 +7,11 @@ import { Paper } from './entities/paper.entity';
 
 @Injectable()
 export class PaperService {
+  async getAll() {
+    return await this.paperRepository.find({
+      order: { create_date: 'DESC' },
+    });
+  }
   constructor(
     @InjectRepository(Paper) private paperRepository: Repository<Paper>,
   ) {}

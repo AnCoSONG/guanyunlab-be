@@ -7,6 +7,35 @@ import { Project } from './entities/project.entity';
 
 @Injectable()
 export class ProjectService {
+  async getRandom(count: number) {
+    const res = await this.getAll();
+    if (count > res.length) {
+      count = res.length;
+    }
+    const randomIndices = [];
+    const randomProjects = [];
+    while (randomIndices.length < count) {
+      const randomIndex = Math.floor(Math.random() * res.length);
+      if (!randomIndices.includes(randomIndex)) {
+        randomIndices.push(randomIndex);
+        randomProjects.push(res[randomIndex]);
+      }
+    }
+    return randomProjects;
+  }
+  async getAll() {
+    return await this.projectRepository.find({
+      order: { create_date_real: 'DESC' },
+      select: [
+        'id',
+        'hero_img',
+        'en_name',
+        'first_author',
+        'view_count',
+        'create_date',
+      ],
+    });
+  }
   async updateViewCount(id: string) {
     return await this.projectRepository.increment({ id }, 'view_count', 1);
   }

@@ -9,7 +9,7 @@ import { LocalGuard } from './guard/local.guard';
 @ApiTags('鉴权')
 @Controller('auth')
 export class AuthController {
-  private readonly logger = new Logger('AuthController')
+  private readonly logger = new Logger('AuthController');
   constructor(private readonly authService: AuthService) {}
 
   @Post('login')
