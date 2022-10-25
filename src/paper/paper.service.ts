@@ -9,7 +9,7 @@ import { Paper } from './entities/paper.entity';
 export class PaperService {
   async getAll() {
     return await this.paperRepository.find({
-      order: { create_date: 'DESC' },
+      order: { published_at: 'DESC' },
     });
   }
   constructor(

@@ -36,8 +36,8 @@ export class AppController {
     const src =
       process.env.NODE_ENV === 'dev'
         ? 'http://localhost:3173/static/' + file.filename
-        : 'https://design.zju.edu.cn/gylab-api/' + file.path;
+        : 'https://guanyunlab.anco.fun/gylab-api/' + file.path;
 
-    return {location: src}
+    return { location: src };
   }
 }

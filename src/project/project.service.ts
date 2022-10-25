@@ -25,14 +25,16 @@ export class ProjectService {
   }
   async getAll() {
     return await this.projectRepository.find({
-      order: { create_date_real: 'DESC' },
+      order: { create_date: 'DESC' },
       select: [
         'id',
         'hero_img',
         'en_name',
+        'cn_name',
         'first_author',
         'view_count',
         'create_date',
+        'short_abstract',
       ],
     });
   }

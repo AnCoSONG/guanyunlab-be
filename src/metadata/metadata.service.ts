@@ -8,7 +8,7 @@ import { Metadatum } from './entities/metadatum.entity';
 @Injectable()
 export class MetadataService {
   async getContactHypertexts() {
-    return await this.metadatumRepository.find({
+    const res = await this.metadatumRepository.find({
       select: [
         'collaboration_sponsor_hypertext',
         'info_hypertext',
@@ -16,11 +16,22 @@ export class MetadataService {
         'recruit_hypertext',
       ],
     });
+    if (res.length === 0) {
+      throw new NotFoundException(
+        `Contact hypertext does not exist in the database`,
+      );
+    }
+    return res[0];
   }
   async getAboutImgs() {
-    return await this.metadatumRepository.find({
+    const res = await this.metadatumRepository.find({
       select: ['about_heros'],
     });
+    if (res.length === 0) {
+      throw new NotFoundException(`About img does not exist in the database`);
+    } else {
+      return res[0].about_heros;
+    }
   }
   constructor(
     @InjectRepository(Metadatum)
