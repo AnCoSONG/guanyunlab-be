@@ -9,12 +9,7 @@ import { Metadatum } from './entities/metadatum.entity';
 export class MetadataService {
   async getContactHypertexts() {
     const res = await this.metadatumRepository.find({
-      select: [
-        'collaboration_sponsor_hypertext',
-        'info_hypertext',
-        'lab_office_hypertext',
-        'recruit_hypertext',
-      ],
+      select: ['contact_hypertext'],
     });
     if (res.length === 0) {
       throw new NotFoundException(

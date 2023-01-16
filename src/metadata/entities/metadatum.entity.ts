@@ -9,14 +9,5 @@ export class Metadatum {
   about_heros: string[];
 
   @Column({ type: 'text' })
-  recruit_hypertext: string;
-
-  @Column({ type: 'text' })
-  collaboration_sponsor_hypertext: string;
-
-  @Column({ type: 'text' })
-  lab_office_hypertext: string;
-
-  @Column({ type: 'text' })
-  info_hypertext: string;
+  contact_hypertext: string;
 }
