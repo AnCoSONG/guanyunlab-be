@@ -49,6 +49,9 @@ export class Project {
   @Column({ type: 'json', nullable: true })
   imgs: string[];
 
+  @Column({ type: 'int', default: -1 })
+  hero_priority: number; // -1 means do not show in head, larger than 0 (0 included) means show in head, the larger the higher priority
+
   @CreateDateColumn({ type: 'timestamp' })
   create_date_real: string;
 

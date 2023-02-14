@@ -1,12 +1,28 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { MoreThanOrEqual, Repository } from 'typeorm';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { Project } from './entities/project.entity';
 
 @Injectable()
 export class ProjectService {
+  async getHeroProjects() {
+    return await this.projectRepository.find({
+      where: { hero_priority: MoreThanOrEqual(0) },
+      order: { hero_priority: 'DESC' },
+      select: [
+        'id',
+        'hero_img',
+        'en_name',
+        'cn_name',
+        'first_author',
+        'view_count',
+        'create_date',
+        'short_abstract',
+      ],
+    });
+  }
   async getRandom(count: number) {
     const res = await this.getAll();
     if (count > res.length) {

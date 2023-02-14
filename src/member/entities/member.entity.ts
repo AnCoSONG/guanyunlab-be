@@ -1,9 +1,16 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 export enum MemberRole {
   student = 'student',
   teacher = 'teacher',
   intern = 'intern',
+  graduate = 'graduate',
 }
 @Entity()
 export class Member {
@@ -28,9 +35,18 @@ export class Member {
   @Column({ type: 'varchar', length: 20 })
   cn_title: string;
 
-  @Column({ type: 'varchar', length: 20 })
+  @Column({ type: 'varchar', length: 50 })
   en_title: string;
 
   @Column({ type: 'text' })
   hypertext: string;
+
+  @Column({ type: 'int', default: 0 })
+  priority: number;
+
+  @CreateDateColumn({ type: 'timestamp' })
+  create_date: string;
+
+  @UpdateDateColumn({ type: 'timestamp' })
+  update_date: string;
 }

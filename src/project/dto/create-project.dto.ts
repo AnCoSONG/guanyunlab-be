@@ -62,4 +62,10 @@ export class CreateProjectDto {
     ],
   })
   imgs: string[];
+
+  @ApiProperty({
+    description: '项目头图优先级',
+    example: -1,
+  })
+  hero_priority: number;
 }

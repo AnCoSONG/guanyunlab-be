@@ -13,7 +13,7 @@ import { Member, MemberRole } from './entities/member.entity';
 export class MemberService {
   async findMemberGroupByIdentity() {
     const result = {};
-    for (const identity of ['teacher', 'student', 'intern']) {
+    for (const identity of ['teacher', 'student', 'intern', 'graduate']) {
       result[identity] = await this.findMemberByIdentity(
         identity as MemberRole,
       );
@@ -21,7 +21,7 @@ export class MemberService {
     return result;
   }
   async findMemberByIdentity(identity: MemberRole) {
-    if (['student', 'teacher', 'intern'].indexOf(identity) === -1) {
+    if (['student', 'teacher', 'intern', 'graduate'].indexOf(identity) === -1) {
       throw new BadRequestException(
         `Identity ${identity} is not valid, it should be one of student, teacher, intern`,
       );
@@ -29,6 +29,7 @@ export class MemberService {
     return await this.memberRepository.find({
       where: { identity },
       select: ['avatar', 'cn_name', 'cn_title', 'en_name', 'en_title', 'id'],
+      order: { priority: 'DESC' },
     });
   }
   constructor(

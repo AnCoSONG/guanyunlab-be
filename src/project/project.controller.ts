@@ -45,6 +45,11 @@ export class ProjectController {
     return this.projectService.getRandom(count);
   }
 
+  @Get('heroProjects')
+  getHeroProjects() {
+    return this.projectService.getHeroProjects();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.projectService.findOne(id);
