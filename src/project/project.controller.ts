@@ -55,6 +55,11 @@ export class ProjectController {
     return this.projectService.findOne(id);
   }
 
+  @Get('/queryByEN/:en_name')
+  findOneByEnName(@Param('en_name') en_name: string) {
+    return this.projectService.findOneByEnName(en_name);
+  }
+
   @Patch(':id')
   @UseGuards(JwtGuard)
   @ApiBearerAuth()

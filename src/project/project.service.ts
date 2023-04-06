@@ -7,6 +7,19 @@ import { Project } from './entities/project.entity';
 
 @Injectable()
 export class ProjectService {
+  async findOneByEnName(en_name: string) {
+    const res = await this.projectRepository.find({
+      where: { en_name },
+    });
+    if (res.length > 1) {
+      throw new Error('Duplicate project name');
+    } else if (res.length === 0) {
+      throw new NotFoundException(
+        `Project with en_name ${en_name} does not exist in the database`,
+      );
+    }
+    return res[0];
+  }
   async getHeroProjects() {
     return await this.projectRepository.find({
       where: { hero_priority: MoreThanOrEqual(0) },
