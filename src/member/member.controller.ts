@@ -35,6 +35,11 @@ export class MemberController {
     return this.memberService.findAll();
   }
 
+  @Get('/queryByEN/:en_name')
+  findOneByEnName(@Param('en_name') en_name: string) {
+    return this.memberService.findOneByEnName(en_name);
+  }
+
   @Get('identity')
   findMemberByIdentity(@Query('identity') identity: MemberRole) {
     return this.memberService.findMemberByIdentity(identity);

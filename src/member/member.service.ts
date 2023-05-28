@@ -11,9 +11,28 @@ import { Member, MemberRole } from './entities/member.entity';
 
 @Injectable()
 export class MemberService {
+  async findOneByEnName(en_name: string) {
+    const res = await this.memberRepository.find({
+      where: { en_name },
+    });
+    if (res.length > 1) {
+      throw new Error('Duplicate member name');
+    } else if (res.length === 0) {
+      throw new NotFoundException(
+        `Member with en_name ${en_name} does not exist in the database`,
+      );
+    }
+    return res[0];
+  }
   async findMemberGroupByIdentity() {
     const result = {};
-    for (const identity of ['teacher', 'student', 'intern', 'graduate']) {
+    for (const identity of [
+      'teacher',
+      'student',
+      'intern',
+      'graduate',
+      'postdoc',
+    ]) {
       result[identity] = await this.findMemberByIdentity(
         identity as MemberRole,
       );
@@ -21,9 +40,13 @@ export class MemberService {
     return result;
   }
   async findMemberByIdentity(identity: MemberRole) {
-    if (['student', 'teacher', 'intern', 'graduate'].indexOf(identity) === -1) {
+    if (
+      ['student', 'teacher', 'intern', 'graduate', 'postdoc'].indexOf(
+        identity,
+      ) === -1
+    ) {
       throw new BadRequestException(
-        `Identity ${identity} is not valid, it should be one of student, teacher, intern`,
+        `Identity ${identity} is not valid, it should be one of student, teacher, intern, postdoc`,
       );
     }
     return await this.memberRepository.find({
