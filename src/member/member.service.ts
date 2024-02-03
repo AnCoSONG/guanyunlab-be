@@ -32,6 +32,7 @@ export class MemberService {
       'intern',
       'graduate',
       'postdoc',
+      'ra',
     ]) {
       result[identity] = await this.findMemberByIdentity(
         identity as MemberRole,
@@ -41,7 +42,7 @@ export class MemberService {
   }
   async findMemberByIdentity(identity: MemberRole) {
     if (
-      ['student', 'teacher', 'intern', 'graduate', 'postdoc'].indexOf(
+      ['student', 'teacher', 'intern', 'graduate', 'postdoc', 'ra'].indexOf(
         identity,
       ) === -1
     ) {

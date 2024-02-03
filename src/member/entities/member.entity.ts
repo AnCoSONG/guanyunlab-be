@@ -12,6 +12,7 @@ export enum MemberRole {
   intern = 'intern',
   graduate = 'graduate',
   postdoc = 'postdoc',
+  ra = 'ra',
 }
 @Entity()
 export class Member {

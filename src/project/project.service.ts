@@ -52,6 +52,23 @@ export class ProjectService {
     }
     return randomProjects;
   }
+
+  async getNProjects(count: number) {
+    return await this.projectRepository.find({
+      order: { create_date: 'DESC' },
+      take: count,
+      select: [
+        'id',
+        'hero_img',
+        'en_name',
+        'cn_name',
+        'first_author',
+        'view_count',
+        'create_date',
+        'short_abstract',
+      ],
+    });
+  }
   async getAll() {
     return await this.projectRepository.find({
       order: { create_date: 'DESC' },

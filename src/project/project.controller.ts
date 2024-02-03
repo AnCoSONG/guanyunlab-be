@@ -45,6 +45,11 @@ export class ProjectController {
     return this.projectService.getRandom(count);
   }
 
+  @Get('nprojects')
+  getNProjects(@Query('count', ParseIntPipe) count: number) {
+    return this.projectService.getNProjects(count);
+  }
+
   @Get('heroProjects')
   getHeroProjects() {
     return this.projectService.getHeroProjects();
