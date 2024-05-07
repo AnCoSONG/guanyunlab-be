@@ -40,8 +40,8 @@ export class Member {
   @Column({ type: 'varchar', length: 50 })
   en_title: string;
 
-  @Column({ type: 'text' })
-  hypertext: string;
+  @Column({ type: 'text', nullable: true })
+  hypertext?: string;
 
   @Column({ type: 'int', default: 0 })
   priority: number;
