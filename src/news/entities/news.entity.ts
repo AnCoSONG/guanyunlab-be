@@ -13,6 +13,9 @@ export class News {
   @Column()
   title: string;
 
+  @Column({ type: 'varchar', length: 20 })
+  update_date: string;
+
   @UpdateDateColumn({ type: 'timestamp' })
   last_date: string;
 

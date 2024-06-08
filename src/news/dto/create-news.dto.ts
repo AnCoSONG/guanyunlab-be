@@ -23,4 +23,10 @@ export class CreateNewsDto {
     <iframe width="500" height="315" src="https://www.youtube.com/embed/ISk80iLhdfU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`,
   })
   hypertext: string;
+
+  @ApiProperty({
+    description: '新闻更新日期',
+    example: '2022/02/10',
+  })
+  update_date: string;
 }
