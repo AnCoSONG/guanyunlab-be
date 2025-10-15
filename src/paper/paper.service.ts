@@ -1,16 +1,34 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Between, Repository } from 'typeorm';
 import { CreatePaperDto } from './dto/create-paper.dto';
 import { UpdatePaperDto } from './dto/update-paper.dto';
 import { Paper } from './entities/paper.entity';
 
 @Injectable()
 export class PaperService {
-  async getAll() {
-    return await this.paperRepository.find({
-      order: { published_at: 'DESC' },
-    });
+  async getAll(year?: number) {
+    const queryCondition = {
+      order: { published_at: 'DESC' as const },
+    };
+    if (year) {
+      const startDate = new Date(year, 0, 1);
+      const endDate = new Date(year, 11, 31, 23, 59, 59);
+      queryCondition['where'] = {
+        ...queryCondition['where'],
+        published_at: Between(startDate, endDate),
+      };
+    }
+    return await this.paperRepository.find(queryCondition);
+  }
+
+  async getYearOptions() {
+    const papers = await this.paperRepository
+      .createQueryBuilder('paper')
+      .select('DISTINCT YEAR(paper.published_at)', 'year')
+      .orderBy('year', 'DESC')
+      .getRawMany();
+    return papers.map((p) => p.year);
   }
   constructor(
     @InjectRepository(Paper) private paperRepository: Repository<Paper>,
