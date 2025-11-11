@@ -23,6 +23,9 @@ export class Paper {
   venue: string;
 
   @Column({ type: 'varchar', length: 255 })
+  award: string;
+
+  @Column({ type: 'varchar', length: 255 })
   href: string;
 
   @Column({ type: 'timestamp' })
