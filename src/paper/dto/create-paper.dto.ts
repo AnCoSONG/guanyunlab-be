@@ -31,4 +31,10 @@ export class CreatePaperDto {
     example: 'https://dl.acm.org/doi/10.1145/3526212',
   })
   href: string;
+
+  @ApiProperty({
+    description: '论文发表时间',
+    example: new Date(),
+  })
+  published_at: string;
 }

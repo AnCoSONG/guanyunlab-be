@@ -12,7 +12,7 @@ async function bootstrap() {
       origin:
         process.env.NODE_ENV === 'dev'
           ? ['http://localhost:31731', 'http://localhost:5173']
-          : ['https://design.zju.edu.cn'],
+          : ['https://design.zju.edu.cn', 'https://guanyunlab.anco.fun'],
       credentials: true,
     },
   });
@@ -22,8 +22,8 @@ async function bootstrap() {
   app.setGlobalPrefix('gylab-api');
   // 静态资源路径
   app.useStaticAssets(join(__dirname, '..', '~gylab-static'), {
-    prefix: '/static/'
-  })
+    prefix: '/static/',
+  });
   const config = new DocumentBuilder()
     .setTitle('GYLab Home Page Api')
     .setDescription('GYLab Home Page Api')
@@ -33,6 +33,6 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api-doc', app, document, { useGlobalPrefix: true });
-  await app.listen(process.env.NODE_ENV === 'dev' ? 3173: 31730);
+  await app.listen(process.env.NODE_ENV === 'dev' ? 3173 : 31730);
 }
 bootstrap();

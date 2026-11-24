@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { PaperService } from './paper.service';
 import { CreatePaperDto } from './dto/create-paper.dto';
@@ -34,8 +35,13 @@ export class PaperController {
   }
 
   @Get('all')
-  getAll() {
-    return this.paperService.getAll();
+  getAll(@Query('year') year?: number) {
+    return this.paperService.getAll(year);
+  }
+
+  @Get('year-options')
+  getYearOptions() {
+    return this.paperService.getYearOptions();
   }
 
   @Get(':id')

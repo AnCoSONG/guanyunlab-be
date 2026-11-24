@@ -22,7 +22,9 @@ export class NewsService {
   }
 
   async findAll() {
-    return await this.newsRepository.find({ order: { last_date: 'DESC' } });
+    return await this.newsRepository.find({
+      order: { update_date: 'DESC', last_date: 'DESC' },
+    });
   }
 
   async findOne(id: string) {
