@@ -11,8 +11,7 @@ import { MulterModule } from '@nestjs/platform-express';
 import { MetadataModule } from './metadata/metadata.module';
 import { AuthModule } from './auth/auth.module';
 import { ImgModule } from './img/img.module';
-import * as multer from 'multer';
-import * as fs from 'fs';
+import { gylabMulterOptions } from './upload/multer.config';
 @Module({
   imports: [
     NewsModule,
@@ -30,20 +29,7 @@ import * as fs from 'fs';
       synchronize: true,
     }),
     UserModule,
-    MulterModule.register({
-      // dest: './datasets',
-      storage: multer.diskStorage({
-        destination: (req, file, cb) => {
-          if (!fs.existsSync('./~gylab-static')) {
-            fs.mkdirSync('./~gylab-static');
-          }
-          cb(null, './~gylab-static');
-        },
-        filename: (req, file, cb) => {
-          cb(null, file.originalname);
-        },
-      }),
-    }),
+    MulterModule.register(gylabMulterOptions),
     MetadataModule,
     AuthModule,
     ImgModule,
