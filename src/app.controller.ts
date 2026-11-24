@@ -15,6 +15,10 @@ import {
   removeUploadedFile,
   validateUploadedFileOnDisk,
 } from './upload/upload-file.util';
+import * as os from 'os';
+
+/** 写死探针 ID：外网 curl 若与此不一致，说明没打到本仓库最新部署 */
+export const DEPLOYMENT_PROBE_ID = 'gylab-probe-7f3a9c2e-8b14-4d6a-9e31';
 
 @Controller()
 export class AppController {
@@ -30,6 +34,19 @@ export class AppController {
   @ApiBearerAuth()
   testJwt() {
     return 'pass';
+  }
+
+  /** 部署探针：用于确认外网流量是否打到当前机器与进程（验收后可删） */
+  @Get('deployment-check')
+  deploymentCheck() {
+    return {
+      deployId: DEPLOYMENT_PROBE_ID,
+      host: os.hostname(),
+      cwd: process.cwd(),
+      pid: process.pid,
+      nodeEnv: process.env.NODE_ENV ?? 'unknown',
+      at: new Date().toISOString(),
+    };
   }
 
   @Post('upload')
